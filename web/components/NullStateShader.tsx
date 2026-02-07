@@ -3,8 +3,12 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
+import { useTheme } from "next-themes";
+
 export default function NullStateShader() {
     const containerRef = useRef<HTMLDivElement>(null);
+    const { resolvedTheme } = useTheme();
+    const themeRef = useRef(resolvedTheme); // Ref to access latest theme in animation loop without re-binding
 
     useEffect(() => {
         if (!containerRef.current) return;
@@ -21,9 +25,17 @@ export default function NullStateShader() {
         container.appendChild(renderer.domElement);
 
         // Uniforms
+        // Initial Colors based on current theme
+        const isDark = themeRef.current === "dark";
+        // Light Mode: BG is "Dim Dark" (0.5), Fog is "Light" (0.95)
+        const initialBg = isDark ? new THREE.Color(0.02, 0.02, 0.02) : new THREE.Color(0.1, 0.1, 0.1);
+        const initialFog = isDark ? new THREE.Color(0.5, 0.5, 0.5) : new THREE.Color(1, 1, 1);
+
         const uniforms = {
             u_time: { value: 0 },
             u_resolution: { value: new THREE.Vector2(width, height) },
+            u_bg_color: { value: initialBg },
+            u_fog_color: { value: initialFog },
         };
 
         // Shader
@@ -37,6 +49,8 @@ export default function NullStateShader() {
             fragmentShader: `
                 uniform float u_time;
                 uniform vec2 u_resolution;
+                uniform vec3 u_bg_color;
+                uniform vec3 u_fog_color;
 
                 // Simplex noise function
                 vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
@@ -87,8 +101,11 @@ export default function NullStateShader() {
                     noise = noise * 0.5 + 0.5;
                     
                     // Dark, moody gradient - tuned for subtle visibility
-                    vec3 color1 = vec3(0.5, 0.5, 0.5); // Subtle grey with slight blue
-                    vec3 color2 = vec3(0.02, 0.02, 0.02);  // Near-void black
+                    // vec3 color1 = vec3(0.5, 0.5, 0.5); // Subtle grey with slight blue
+                    // vec3 color2 = vec3(0.02, 0.02, 0.02);  // Near-void black
+                    
+                    vec3 color1 = u_fog_color;
+                    vec3 color2 = u_bg_color;
                     
                     // Add some subtle variation
                     float mask = smoothstep(0.2, 0.8, noise);
@@ -110,6 +127,21 @@ export default function NullStateShader() {
         let animationId: number;
         const animate = (time: number) => {
             uniforms.u_time.value = time * 0.001;
+
+            // Smoothly interpolate colors based on theme
+            // We use the ref here to check the current desired state
+            const targetBg = themeRef.current === "dark"
+                ? new THREE.Color(0.02, 0.02, 0.02)
+                : new THREE.Color(0.5, 0.5, 0.5);
+
+            const targetFog = themeRef.current === "dark"
+                ? new THREE.Color(0.5, 0.5, 0.5)
+                : new THREE.Color(0.95, 0.95, 0.95);
+
+            // Simple lerp for smooth transition (0.05 factor)
+            uniforms.u_bg_color.value.lerp(targetBg, 0.05);
+            uniforms.u_fog_color.value.lerp(targetFog, 0.05);
+
             renderer.render(scene, camera);
             animationId = requestAnimationFrame(animate);
         };
@@ -136,5 +168,10 @@ export default function NullStateShader() {
         };
     }, []);
 
-    return <div ref={containerRef} className="absolute inset-0 z-0 pointer-events-none" />;
+    // Keep theme ref updated
+    useEffect(() => {
+        themeRef.current = resolvedTheme;
+    }, [resolvedTheme]);
+
+    return <div ref={containerRef} className="absolute inset-0 z-0 pointer-events-none transition-opacity duration-1000" />;
 }

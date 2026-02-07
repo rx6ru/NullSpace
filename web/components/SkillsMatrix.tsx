@@ -112,7 +112,7 @@ import SectionDecorator from "@/components/SectionDecorator";
 
 export default function SkillsMatrix() {
     return (
-        <section id="skills" className="bg-black relative z-20 py-24 px-4 md:px-12 overflow-hidden">
+        <section id="skills" className="bg-void relative z-20 py-24 px-4 md:px-12 overflow-hidden transition-colors duration-300">
             <ActiveGridBackground />
             <div className="max-w-7xl mx-auto flex flex-col gap-24 relative z-10">
 
@@ -131,7 +131,7 @@ export default function SkillsMatrix() {
 
                 {/* 1. LANGUAGES SECTION */}
                 <SectionDecorator label="SYS_LANGUAGES" className="flex flex-col gap-8">
-                    <div className="flex items-center gap-4 text-gray-500 font-mono text-sm tracking-widest uppercase">
+                    <div className="flex items-center gap-4 text-monolith/50 font-mono text-sm tracking-widest uppercase">
                         <Code2 size={16} />
                         <span>Core Languages</span>
                         <div className="h-px bg-white/10 flex-grow" />
@@ -147,7 +147,7 @@ export default function SkillsMatrix() {
 
                 {/* 2. DOMAIN CAPABILITIES GRID */}
                 <SectionDecorator label="DOMAIN_MODULES" className="flex flex-col gap-8">
-                    <div className="flex items-center gap-4 text-gray-500 font-mono text-sm tracking-widest uppercase">
+                    <div className="flex items-center gap-4 text-monolith/50 font-mono text-sm tracking-widest uppercase">
                         <ShieldCheck size={16} />
                         <span>Domain Expertise</span>
                         <div className="h-px bg-white/10 flex-grow" />
@@ -172,7 +172,7 @@ function LanguageCard({ lang, index }: { lang: typeof LANGUAGES[0], index: numbe
             key={lang.name}
             initial={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="group relative !bg-black border border-white/10 p-4 flex flex-col items-center justify-center gap-2 hover:!bg-neutral-900 hover:border-neon/50 transition-all duration-300 overflow-hidden"
+            className="group relative !bg-void border border-monolith/20 p-4 flex flex-col items-center justify-center gap-2 hover:!bg-monolith/5 hover:border-neon/50 transition-all duration-300 overflow-hidden"
         >
             {/* White overlay that fades out smoothly */}
             <motion.div
@@ -181,7 +181,7 @@ function LanguageCard({ lang, index }: { lang: typeof LANGUAGES[0], index: numbe
                 whileInView="visible"
                 transition={whiteRevealTransition.fast(index * 0.05)}
                 viewport={{ once: true }}
-                className="absolute inset-0 bg-white z-10"
+                className="absolute inset-0 bg-monolith z-10"
             />
 
             <span className="font-space-mono text-monolith font-bold text-lg md:text-xl group-hover:text-neon transition-colors">
@@ -195,9 +195,10 @@ function LanguageCard({ lang, index }: { lang: typeof LANGUAGES[0], index: numbe
 function DomainCard({ domain, index }: { domain: typeof DOMAINS[0], index: number }) {
     return (
         <motion.div
+            key={domain.id} // Fix: use domain.id as key
             initial={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="group relative !bg-black border border-white/10 p-6 flex flex-col gap-4 hover:!bg-neutral-900 hover:border-neon/30 transition-colors duration-300 overflow-hidden"
+            className="group relative !bg-void border border-monolith/20 p-6 flex flex-col gap-4 hover:!bg-monolith/5 hover:border-neon/30 transition-colors duration-300 overflow-hidden"
         >
             {/* White overlay that fades out smoothly */}
             <motion.div
@@ -206,7 +207,7 @@ function DomainCard({ domain, index }: { domain: typeof DOMAINS[0], index: numbe
                 whileInView="visible"
                 transition={whiteRevealTransition.fast(index * 0.08)}
                 viewport={{ once: true }}
-                className="absolute inset-0 bg-white z-20"
+                className="absolute inset-0 bg-monolith z-20"
             />
 
             {/* Hover Decor - Corner Accent */}
@@ -216,7 +217,7 @@ function DomainCard({ domain, index }: { domain: typeof DOMAINS[0], index: numbe
 
             {/* Header */}
             <div className="flex items-center gap-3 mb-2">
-                <div className="p-2 bg-white/5 rounded text-neon">
+                <div className="p-2 bg-monolith/5 rounded text-neon">
                     <domain.icon size={20} />
                 </div>
                 <h3 className="text-xl font-bold text-monolith font-space-mono uppercase tracking-tight">
@@ -225,7 +226,7 @@ function DomainCard({ domain, index }: { domain: typeof DOMAINS[0], index: numbe
             </div>
 
             {/* Description */}
-            <p className="text-gray-500 text-sm leading-relaxed mb-4 border-b border-white/5 pb-4">
+            <p className="text-monolith/60 text-sm leading-relaxed mb-4 border-b border-monolith/5 pb-4">
                 {domain.description}
             </p>
 
@@ -234,7 +235,7 @@ function DomainCard({ domain, index }: { domain: typeof DOMAINS[0], index: numbe
                 {domain.skills.map(skill => (
                     <span
                         key={skill}
-                        className="px-2 py-1 text-xs font-mono text-gray-300 bg-white/5 border border-white/5 rounded hover:text-white hover:border-neon/30 transition-colors cursor-default"
+                        className="px-2 py-1 text-xs font-mono text-monolith/70 bg-monolith/5 border border-monolith/20 rounded hover:text-monolith hover:border-neon/30 transition-colors cursor-default"
                     >
                         {skill}
                     </span>

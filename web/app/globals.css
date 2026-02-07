@@ -1,17 +1,37 @@
 @import "tailwindcss";
 
 @theme {
-    /* High-Contrast Portfolio Theme */
-    --color-void: #000000;
-    --color-monolith: #ffffff;
-    --color-neon: #6c42f5;
-    --color-grid-dim: #4a4a4a;
-    /* Improved visibility from #333333 */
-
-    /* Typography */
+    /* Kinetic Typography */
     --font-sans: var(--font-inter), system-ui, sans-serif;
     --font-mono: var(--font-mono), ui-monospace, monospace;
     --font-space-mono: var(--font-space-mono), monospace;
+
+    /* Theme Colors (Mapped to CSS Variables) */
+    --color-void: var(--void);
+    --color-monolith: var(--monolith);
+    --color-neon: var(--neon);
+    --color-grid-dim: var(--grid-dim);
+}
+
+:root {
+    /* Technical Light (Default/Light) */
+    --void: #E0E0E0;
+    /* Concrete Grey */
+    --monolith: #111111;
+    /* Ink Black */
+    --neon: #5e35e5;
+    /* Darker Purple for contrast */
+    --grid-dim: #868686;
+    /* Dark Drafting Grey */
+}
+
+/* Force dark mode variables when .dark class is present */
+.dark {
+    /* Brutalist Dark */
+    --void: #000000;
+    --monolith: #ffffff;
+    --neon: #6c42f5;
+    --grid-dim: #666666;
 }
 
 html,
@@ -26,9 +46,13 @@ select,
     cursor: none !important;
 }
 
-html {
-    background-color: var(--color-void);
-    color: var(--color-monolith);
+/* Apply theme variables to body with transition */
+body {
+    background-color: var(--void);
+    color: var(--monolith);
+    transition-property: background-color, color, border-color;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
 }
 
 /* Noise Overlay Utility - Inlined SVG to avoid external dependency */
@@ -38,8 +62,8 @@ html {
 
 /* Selection styling */
 ::selection {
-    background-color: var(--color-neon);
-    color: var(--color-void);
+    background-color: var(--neon);
+    color: var(--void);
 }
 
 /* Scrollbar styling */

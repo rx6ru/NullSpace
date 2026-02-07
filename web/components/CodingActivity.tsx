@@ -111,16 +111,16 @@ export default function CodingActivity() {
     };
 
     return (
-        <section ref={containerRef} className="bg-black py-0 h-auto relative z-20 border-t border-grid-dim overflow-hidden font-mono flex flex-col">
+        <section ref={containerRef} className="bg-void py-0 h-auto relative z-20 border-t border-grid-dim overflow-hidden font-mono flex flex-col transition-colors duration-300">
             <ActiveGridBackground />
 
             <div className="w-full flex flex-col relative z-10">
                 {/* Terminal Window Container */}
-                <div className="border-x border-b border-grid-dim bg-neutral-950/90 backdrop-blur-md flex flex-col shadow-2xl mx-4 md:mx-6 mb-12 mt-0 rounded-b-lg">
+                <div className="border-x border-b border-grid-dim bg-void/90 backdrop-blur-md flex flex-col shadow-2xl mx-4 md:mx-6 mb-12 mt-0 rounded-b-lg transition-colors duration-300">
 
                     {/* Terminal Header */}
-                    <div className="flex items-center justify-between px-6 py-3 border-b border-grid-dim bg-white/5 sticky top-0 z-20">
-                        <div className="flex items-center gap-3 text-xs md:text-sm text-gray-500">
+                    <div className="flex items-center justify-between px-6 py-3 border-b border-grid-dim bg-monolith/5 sticky top-0 z-20 transition-colors duration-300">
+                        <div className="flex items-center gap-3 text-xs md:text-sm text-monolith/60">
                             <Terminal size={16} />
                             <span>root@rxbru:~/system_metrics</span>
                         </div>
@@ -132,7 +132,7 @@ export default function CodingActivity() {
                     </div>
 
                     {/* Terminal Content */}
-                    <div className="p-6 md:p-12 text-sm md:text-base text-gray-300 space-y-6 font-mono leading-relaxed overflow-y-auto">
+                    <div className="p-6 md:p-12 text-sm md:text-base text-monolith/80 space-y-6 font-mono leading-relaxed overflow-y-auto">
 
                         {/* Command Line */}
                         {step >= 1 && (
@@ -143,19 +143,20 @@ export default function CodingActivity() {
                                     animate={{ opacity: 1 }}
                                     className="typing-effect"
                                 >
-                                    ./fetch_metrics.sh --verbose --full-width
+                                    ./fetch_metrics.sh --range 7d --verbose
                                 </motion.span>
                             </div>
                         )}
 
                         {/* System Status Output */}
-                        <div className="space-y-1 text-xs md:text-sm text-gray-400">
+                        <div className="space-y-1 text-xs md:text-sm text-monolith/60">
                             {step >= 2 && <p>&gt; INITIALIZING SYSTEM_MONITOR_V2...</p>}
                             {step >= 3 && <p>&gt; CONNECTING TO WAKATIME_API... <span className="text-neon">OK (24ms)</span></p>}
+                            {step >= 3 && <p>&gt; DATA_RANGE: <span className="text-monolith">LAST_7_DAYS</span></p>}
                             {step >= 4 && (
                                 <>
                                     <p>&gt; LOADING KERNEL MODULES... <span className="text-neon">DONE</span></p>
-                                    <p>&gt; UPTIME: <span className="text-white">{STATS.uptime}</span> | OS: <span className="text-white">{STATS.os}</span></p>
+                                    <p>&gt; UPTIME: <span className="text-monolith">{STATS.uptime}</span> | OS: <span className="text-monolith">{STATS.os}</span></p>
                                     <div className="h-px w-full bg-grid-dim/30 my-6" />
                                 </>
                             )}
@@ -173,7 +174,7 @@ export default function CodingActivity() {
                                     <div className="flex flex-col gap-4">
                                         {STATS.languages.map((lang, i) => (
                                             <div key={lang.name} className="flex flex-col gap-1 w-full">
-                                                <div className="flex justify-between text-xs text-gray-500 w-full max-w-[600px]">
+                                                <div className="flex justify-between text-xs text-monolith/50 w-full max-w-[600px]">
                                                     <span>{lang.name}</span>
                                                 </div>
                                                 <AsciiBar
@@ -199,7 +200,7 @@ export default function CodingActivity() {
                                         <div className="flex flex-col gap-4">
                                             {STATS.editors.map((editor, i) => (
                                                 <div key={editor.name} className="flex flex-col gap-1">
-                                                    <span className="text-xs text-gray-500">{editor.name}</span>
+                                                    <span className="text-xs text-monolith/50">{editor.name}</span>
                                                     <AsciiBar
                                                         percent={editor.percent}
                                                         length={60}
@@ -215,15 +216,15 @@ export default function CodingActivity() {
                                         initial={{ opacity: 0, y: 10 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ duration: 0.5 }}
-                                        className="p-6 border border-dashed border-grid-dim text-xs space-y-3 text-gray-400 max-w-md bg-white/5"
+                                        className="p-6 border border-dashed border-grid-dim text-xs space-y-3 text-monolith/60 max-w-md bg-monolith/5"
                                     >
                                         <div className="flex justify-between">
-                                            <span>TOTAL_TIME_CODED:</span>
-                                            <span className="text-white font-bold">{STATS.totalTime}</span>
+                                            <span>TOTAL_TIME (7D):</span>
+                                            <span className="text-monolith font-bold">{STATS.totalTime}</span>
                                         </div>
                                         <div className="flex justify-between">
                                             <span>DAILY_AVERAGE:</span>
-                                            <span className="text-white font-bold">{STATS.dailyAverage}</span>
+                                            <span className="text-monolith font-bold">{STATS.dailyAverage}</span>
                                         </div>
                                     </motion.div>
                                 </div>
@@ -232,7 +233,7 @@ export default function CodingActivity() {
 
                         {/* Footer Prompt */}
                         {step >= 9 && (
-                            <div className="mt-4 pt-4 border-t border-grid-dim/30 text-gray-500 text-xs">
+                            <div className="mt-4 pt-4 border-t border-grid-dim/30 text-monolith/50 text-xs">
                                 <span>root@rxbru:~/system_metrics$ </span>
                                 <motion.span
                                     animate={{ opacity: [1, 0, 1] }}

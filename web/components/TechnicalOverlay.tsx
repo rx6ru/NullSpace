@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function TechnicalOverlay() {
     const [time, setTime] = useState("");
@@ -36,15 +37,18 @@ export default function TechnicalOverlay() {
     if (!mounted) return null;
 
     return (
-        <div className="fixed inset-0 z-[50] pointer-events-none mix-blend-difference text-white font-space-mono text-[10px] md:text-xs uppercase tracking-widest select-none overflow-hidden">
+        <div className="fixed inset-0 z-[50] pointer-events-none text-monolith font-space-mono text-[10px] md:text-xs uppercase tracking-widest select-none overflow-hidden">
 
             {/* Top Right: Time & Connection */}
-            <div className="absolute top-6 right-6 md:top-12 md:right-12 text-right flex flex-col gap-1">
-                <div className="flex items-center justify-end gap-2">
-                    <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                    <span>SYS_ONLINE</span>
+            <div className="absolute top-6 right-6 md:top-12 md:right-12 text-right flex flex-col gap-4 items-end">
+                <div className="flex flex-col gap-1 items-end">
+                    <div className="flex items-center justify-end gap-2">
+                        <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
+                        <span>SYS_ONLINE</span>
+                    </div>
+                    <span className="opacity-50">{time}</span>
                 </div>
-                <span className="opacity-50">{time}</span>
+                <ThemeToggle />
             </div>
 
             {/* Bottom Left: Scroll / Coordinates */}

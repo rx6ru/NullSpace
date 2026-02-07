@@ -35,17 +35,17 @@ export default function Hero() {
                         Amar Mahato
                     </span>
                     {/* Fixed mobile responsiveness */}
-                    <span className="font-space-mono text-sm md:text-base lg:text-[2vw] tracking-[0.25em] text-gray-400 uppercase">
+                    <span className="font-space-mono text-sm md:text-base lg:text-[2vw] tracking-[0.25em] text-monolith/60 uppercase">
                         Backend_Engineer
                     </span>
                 </div>
             </div>
 
             {/* Bottom Grid */}
-            <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-end w-full max-w-7xl mx-auto border-t border-white/10 pt-8">
+            <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-end w-full max-w-7xl mx-auto border-t border-monolith/20 pt-8">
                 {/* Bio */}
                 <div className="max-w-md">
-                    <p className="text-sm md:text-base font-space-mono text-gray-400 leading-relaxed uppercase tracking-wide">
+                    <p className="text-sm md:text-base font-space-mono text-monolith/60 leading-relaxed uppercase tracking-wide">
                         System Architecture <span className="text-neon/70 mx-2">//</span>
                         High-Performance Computing <span className="text-neon/70 mx-2">//</span>
                         Distributed Systems
@@ -54,7 +54,7 @@ export default function Hero() {
 
                 {/* Status & Links */}
                 <div className="flex flex-col gap-4 md:items-end font-space-mono text-xs md:text-sm">
-                    <div className="flex items-center gap-3 text-monolith bg-white/5 px-3 py-1.5 rounded-full backdrop-blur-sm border border-white/10">
+                    <div className="flex items-center gap-3 text-monolith bg-monolith/5 px-3 py-1.5 rounded-full backdrop-blur-sm border border-monolith/10">
                         <span className="relative flex h-2 w-2">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-neon opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-neon"></span>
@@ -63,7 +63,7 @@ export default function Hero() {
                     </div>
 
                     {/* Social links - bracket text only, bigger */}
-                    <div className="flex gap-6 md:gap-8 text-gray-400 mt-2">
+                    <div className="flex gap-6 md:gap-8 text-monolith/60 mt-2">
                         <a
                             href="https://github.com/rx6ru"
                             className="hover:text-neon transition-colors flex items-center gap-1 group text-xl md:text-3xl lg:text-4xl font-bold tracking-tight"

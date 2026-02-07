@@ -62,7 +62,7 @@ export default function ProjectTerminal() {
     };
 
     return (
-        <section id="projects" className="bg-black py-32 px-4 md:px-12 border-t border-grid-dim relative z-20 overflow-hidden">
+        <section id="projects" className="bg-void py-32 px-4 md:px-12 border-t border-monolith/20 relative z-20 overflow-hidden transition-colors duration-300">
             <ActiveGridBackground />
             <div className="max-w-7xl mx-auto relative z-10">
                 <div className="flex items-center gap-4 mb-16">
@@ -72,9 +72,9 @@ export default function ProjectTerminal() {
                     </h2>
                 </div>
 
-                <SectionDecorator label="ACTIVE_DEPLOYMENTS" className="border-t border-grid-dim">
+                <SectionDecorator label="ACTIVE_DEPLOYMENTS" className="border-t border-monolith/20">
                     {/* Header Row (Desktop) */}
-                    <div className="hidden md:grid grid-cols-12 py-4 px-4 md:px-6 text-xs font-mono text-gray-500 border-b border-grid-dim/50">
+                    <div className="hidden md:grid grid-cols-12 py-4 px-4 md:px-6 text-xs font-mono text-gray-500 border-b border-monolith/20">
                         <div className="col-span-1">ID</div>
                         <div className="col-span-3">PROJECT</div>
                         <div className="col-span-4">DESCRIPTION</div>
@@ -100,15 +100,15 @@ function ProjectRow({ project, isExpanded, onToggle }: { project: Project; isExp
     return (
         <motion.div
             className={clsx(
-                "border-b border-grid-dim group cursor-pointer transition-colors duration-300 relative",
-                isExpanded ? "!bg-neutral-900" : "!bg-black hover:!bg-neutral-950"
+                "border-b border-monolith/20 group cursor-pointer transition-colors duration-300 relative",
+                isExpanded ? "bg-monolith/5 dark:bg-monolith/10" : "!bg-transparent hover:!bg-monolith/5"
             )}
             onClick={onToggle}
         >
             {/* Main Row Content */}
             <div className="grid grid-cols-1 md:grid-cols-12 py-6 px-4 md:px-6 gap-4 md:gap-0 items-start md:items-center font-mono">
                 {/* ID */}
-                <div className="col-span-1 text-gray-600 text-sm group-hover:text-neon transition-colors">
+                <div className="col-span-1 text-monolith/60 text-sm group-hover:text-neon transition-colors">
                     [{project.id}]
                 </div>
 
@@ -118,14 +118,14 @@ function ProjectRow({ project, isExpanded, onToggle }: { project: Project; isExp
                 </div>
 
                 {/* Description (Desktop) */}
-                <div className="hidden md:block col-span-4 text-sm text-gray-400">
+                <div className="hidden md:block col-span-4 text-sm text-monolith/60">
                     {project.description}
                 </div>
 
                 {/* Stack */}
                 <div className="hidden md:flex col-span-4 gap-2 flex-wrap">
                     {project.stack.slice(0, 3).map((tech) => (
-                        <span key={tech} className="text-xs border border-grid-dim px-2 py-1 text-gray-500 rounded-sm">
+                        <span key={tech} className="text-xs border border-monolith/20 px-2 py-1 text-gray-500 rounded-sm">
                             {tech}
                         </span>
                     ))}
@@ -136,9 +136,9 @@ function ProjectRow({ project, isExpanded, onToggle }: { project: Project; isExp
 
                 {/* Mobile View: Desc + Stack */}
                 <div className="col-span-12 md:hidden flex flex-col gap-3 mt-2">
-                    <p className="text-sm text-gray-400">{project.description}</p>
+                    <p className="text-sm text-monolith/60">{project.description}</p>
                     <div className="flex gap-2 flex-wrap">
-                        {project.stack.map(s => <span key={s} className="text-xs text-gray-600 border border-gray-800 px-1">{s}</span>)}
+                        {project.stack.map(s => <span key={s} className="text-xs text-monolith/70 border border-monolith/20 px-1">{s}</span>)}
                     </div>
                 </div>
             </div>
@@ -154,22 +154,22 @@ function ProjectRow({ project, isExpanded, onToggle }: { project: Project; isExp
                         className="overflow-hidden"
                     >
                         <div className="py-8 px-4 md:pr-6 md:pl-[calc(8.33%+1.5rem)] grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div className="font-sans text-gray-400 leading-relaxed max-w-xl">
+                            <div className="font-sans text-monolith/80 leading-relaxed max-w-xl">
                                 <p>{project.details}</p>
                             </div>
 
                             <div className="flex flex-col gap-4 font-mono text-sm">
-                                <div className="text-gray-500 mb-2">// ACTIONS</div>
+                                <div className="text-monolith/50 mb-2">// ACTIONS</div>
 
                                 {project.github && (
-                                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-monolith hover:text-neon transition-colors group/link p-2 -ml-2 hover:bg-white/5 rounded">
+                                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-monolith hover:text-neon transition-colors group/link p-2 -ml-2 hover:bg-monolith/5 rounded">
                                         <Github className="w-4 h-4" />
                                         <span>{`> ACCESS_SOURCE_CODE`}</span>
                                     </a>
                                 )}
 
                                 {project.live && (
-                                    <a href={project.live} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-monolith hover:text-neon transition-colors group/link p-2 -ml-2 hover:bg-white/5 rounded">
+                                    <a href={project.live} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-monolith hover:text-neon transition-colors group/link p-2 -ml-2 hover:bg-monolith/5 rounded">
                                         <ExternalLink className="w-4 h-4" />
                                         <span>{`> EXECUTE_LIVE_PREVIEW`}</span>
                                     </a>

@@ -23,7 +23,7 @@ export default function SectionDecorator({ label, children, className = "" }: Se
             {children}
 
             {/* Decorative Crosshair/Plus Marker (Bottom Right of section content usually) */}
-            <div className="absolute -bottom-8 -right-4 md:-right-8 text-gray-600 font-mono text-xs opacity-30 select-none">
+            <div className="absolute -bottom-8 -right-4 md:-right-8 text-monolith/30 font-mono text-xs select-none">
                 +
             </div>
         </div>

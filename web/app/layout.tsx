@@ -2,6 +2,7 @@ import { Inter, JetBrains_Mono, Space_Mono } from "next/font/google";
 import "./globals.css";
 import { NoiseOverlay } from "@/components/NoiseOverlay";
 import { generateStructuredData } from "@/lib/structured-data";
+import Providers from "@/components/Providers";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
 import Preloader from "@/components/Preloader";
@@ -39,9 +40,9 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en" className="scroll-smooth">
+        <html lang="en" suppressHydrationWarning>
             <body
-                className={`${spaceMono.variable} antialiased bg-black text-white selection:bg-neon/30 selection:text-neon`}
+                className={`${spaceMono.variable} antialiased bg-void text-monolith selection:bg-neon/30 selection:text-neon transition-colors duration-300`}
             >
                 <script
                     type="application/ld+json"
@@ -49,15 +50,17 @@ export default function RootLayout({
                         __html: JSON.stringify(generateStructuredData()),
                     }}
                 />
-                <Preloader />
-                <TechnicalOverlay />
-                <CustomCursor />
-                <ScrollToTop />
-                <ScrollProgress />
-                <SmoothScroll>
-                    <NoiseOverlay />
-                    {children}
-                </SmoothScroll>
+                <Providers>
+                    <Preloader />
+                    <TechnicalOverlay />
+                    <CustomCursor />
+                    <ScrollToTop />
+                    <ScrollProgress />
+                    <SmoothScroll>
+                        <NoiseOverlay />
+                        {children}
+                    </SmoothScroll>
+                </Providers>
             </body>
         </html>
     );

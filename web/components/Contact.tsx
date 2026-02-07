@@ -20,7 +20,7 @@ export default function Contact() {
                             // ESTABLISH_CONNECTION
                         </h2>
                     </div>
-                    <p className="text-gray-500 font-mono text-sm max-w-xl">
+                    <p className="text-monolith/60 font-mono text-sm max-w-xl">
                         Open for freelance projects, full-time opportunities, and interesting collaborations.
                         Response time: Usually within 24 hours.
                     </p>
@@ -37,7 +37,7 @@ export default function Contact() {
                     >
                         {/* Email */}
                         <div className="group">
-                            <span className="text-gray-500 font-mono text-xs uppercase tracking-widest mb-2 block">
+                            <span className="text-monolith/50 font-mono text-xs uppercase tracking-widest mb-2 block">
                                 Primary Contact
                             </span>
                             <a
@@ -51,10 +51,10 @@ export default function Contact() {
 
                         {/* Location */}
                         <div>
-                            <span className="text-gray-500 font-mono text-xs uppercase tracking-widest mb-2 block">
+                            <span className="text-monolith/50 font-mono text-xs uppercase tracking-widest mb-2 block">
                                 Location
                             </span>
-                            <div className="flex items-center gap-2 text-lg font-mono text-gray-400">
+                            <div className="flex items-center gap-2 text-lg font-mono text-monolith/70">
                                 <MapPin className="w-4 h-4" />
                                 <span>Remote / India</span>
                             </div>
@@ -89,17 +89,17 @@ export default function Contact() {
                             <input
                                 type="text"
                                 placeholder="Your Name"
-                                className="bg-white/5 border border-white/10 px-4 py-3 font-mono text-sm text-monolith placeholder:text-gray-600 focus:border-neon/50 focus:outline-none transition-colors"
+                                className="bg-monolith/5 border border-monolith/10 px-4 py-3 font-mono text-sm text-monolith placeholder:text-monolith/50 focus:border-neon/50 focus:outline-none transition-colors"
                             />
                             <input
                                 type="email"
                                 placeholder="your@email.com"
-                                className="bg-white/5 border border-white/10 px-4 py-3 font-mono text-sm text-monolith placeholder:text-gray-600 focus:border-neon/50 focus:outline-none transition-colors"
+                                className="bg-monolith/5 border border-monolith/10 px-4 py-3 font-mono text-sm text-monolith placeholder:text-monolith/50 focus:border-neon/50 focus:outline-none transition-colors"
                             />
                             <textarea
                                 placeholder="Tell me about your project..."
                                 rows={4}
-                                className="bg-white/5 border border-white/10 px-4 py-3 font-mono text-sm text-monolith placeholder:text-gray-600 focus:border-neon/50 focus:outline-none transition-colors resize-none"
+                                className="bg-monolith/5 border border-monolith/10 px-4 py-3 font-mono text-sm text-monolith placeholder:text-monolith/50 focus:border-neon/50 focus:outline-none transition-colors resize-none"
                             />
                             <button
                                 type="button"
@@ -110,7 +110,7 @@ export default function Contact() {
                             </button>
                         </div>
 
-                        <p className="text-gray-600 text-xs font-mono">
+                        <p className="text-monolith/50 text-xs font-mono">
                             * Form is for demonstration. Use email for actual contact.
                         </p>
                     </motion.div>

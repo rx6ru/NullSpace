@@ -69,11 +69,11 @@ export default function ActiveGridBackground() {
         <div className="absolute inset-0 z-[-1] pointer-events-none overflow-hidden">
             {/* Base Grid Lines (CSS Pattern) */}
             <div
-                className="absolute inset-0 opacity-[0.1]"
+                className="absolute inset-0 opacity-[0.2]"
                 style={{
                     backgroundImage: `
-                        linear-gradient(to right, rgba(255, 255, 255, 0.5) 1.5px, transparent 1.5px),
-                        linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 1.5px, transparent 1.5px)
+                        linear-gradient(to right, var(--color-grid-dim) 1.5px, transparent 1.5px),
+                        linear-gradient(to bottom, var(--color-grid-dim) 1.5px, transparent 1.5px)
                     `,
                     backgroundSize: `${GRID_SIZE}px ${GRID_SIZE}px`,
                     maskImage: "linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)" // Fade out at very top/bottom
