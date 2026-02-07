@@ -106,6 +106,7 @@ const DOMAINS = [
 ];
 
 import ActiveGridBackground from "@/components/ActiveGridBackground";
+import SectionDecorator from "@/components/SectionDecorator";
 
 // --- Components ---
 
@@ -129,7 +130,7 @@ export default function SkillsMatrix() {
                 </motion.div>
 
                 {/* 1. LANGUAGES SECTION */}
-                <div className="flex flex-col gap-8">
+                <SectionDecorator label="SYS_LANGUAGES" className="flex flex-col gap-8">
                     <div className="flex items-center gap-4 text-gray-500 font-mono text-sm tracking-widest uppercase">
                         <Code2 size={16} />
                         <span>Core Languages</span>
@@ -141,10 +142,11 @@ export default function SkillsMatrix() {
                             <LanguageCard key={lang.name} lang={lang} index={index} />
                         ))}
                     </div>
-                </div>
+                </SectionDecorator>
+
 
                 {/* 2. DOMAIN CAPABILITIES GRID */}
-                <div className="flex flex-col gap-8">
+                <SectionDecorator label="DOMAIN_MODULES" className="flex flex-col gap-8">
                     <div className="flex items-center gap-4 text-gray-500 font-mono text-sm tracking-widest uppercase">
                         <ShieldCheck size={16} />
                         <span>Domain Expertise</span>
@@ -156,7 +158,7 @@ export default function SkillsMatrix() {
                             <DomainCard key={domain.id} domain={domain} index={index} />
                         ))}
                     </div>
-                </div>
+                </SectionDecorator>
 
             </div>
         </section>

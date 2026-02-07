@@ -1,6 +1,7 @@
 import Hero from "@/components/Hero";
 // import About from "@/components/About"; // Redesign planned
 import SkillsMatrix from "@/components/SkillsMatrix";
+import CodingActivity from "@/components/CodingActivity";
 import ProjectTerminal from "@/components/ProjectTerminal";
 // import Contact from "@/components/Contact"; // Removed per user request
 import Footer from "@/components/Footer";
@@ -11,6 +12,7 @@ export default function Home() {
             <Hero />
             {/* <About /> */}
             <SkillsMatrix />
+            <CodingActivity />
             <ProjectTerminal />
             {/* <Contact /> */}
             <Footer />

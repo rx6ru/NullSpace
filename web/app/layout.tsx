@@ -6,6 +6,7 @@ import CustomCursor from "@/components/CustomCursor";
 import Preloader from "@/components/Preloader";
 import ScrollProgress from "@/components/ScrollProgress";
 import ScrollToTop from "@/components/ScrollToTop";
+import TechnicalOverlay from "@/components/TechnicalOverlay";
 
 const inter = Inter({
     subsets: ["latin"],
@@ -33,21 +34,22 @@ export const metadata = {
 
 export default function RootLayout({
     children,
-}: Readonly<{
+}: {
     children: React.ReactNode;
-}>) {
+}) {
     return (
-        <html lang="en">
+        <html lang="en" className="scroll-smooth">
             <body
-                className={`${inter.variable} ${jetbrains.variable} ${spaceMono.variable} bg-void text-monolith font-sans antialiased`}
+                className={`${spaceMono.variable} antialiased bg-black text-white selection:bg-neon/30 selection:text-neon`}
             >
                 <Preloader />
+                <TechnicalOverlay />
+                <CustomCursor />
                 <ScrollToTop />
                 <ScrollProgress />
                 <SmoothScroll>
-                    <CustomCursor />
-                    {children}
                     <NoiseOverlay />
+                    {children}
                 </SmoothScroll>
             </body>
         </html>

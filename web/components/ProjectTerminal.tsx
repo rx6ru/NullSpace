@@ -18,32 +18,40 @@ interface Project {
 const projects: Project[] = [
     {
         id: "01",
-        name: "HYPER_VOID",
-        description: "Algorithmic trading engine with sub-ms execution.",
-        stack: ["RUST", "TOKIO", "GRPC"],
-        details: "A high-frequency trading system architected for minimal latency. Features a custom order matching engine, distributed risk checks, and real-time telemetry visualizer.",
-        github: "https://github.com",
-        live: "https://example.com",
+        name: "CONCIZE",
+        description: "AI meeting assistant & Chrome extension.",
+        stack: ["CHROME_EXT", "RABBITMQ", "GROQ", "QDRANT"],
+        details: "Browser extension for capturing and processing meeting audio. Uses an async microservices pipeline (RabbitMQ) to chunk audio, generating transcripts via Groq and semantic embeddings for Qdrant-powered chat.",
+        github: "https://github.com/rx6ru/Concize",
     },
     {
         id: "02",
-        name: "NEURAL_SHADE",
-        description: "Generative AI texture synthesizer for WebGL.",
-        stack: ["NEXT.JS", "THREE.JS", "STABLE_DIFFUSION"],
-        details: "Browser-based tool for generating seamless PBR textures using latent diffusion models. Integrated directly into a 3D preview environment with real-time lighting adjustment.",
-        github: "https://github.com",
+        name: "WOMBAT",
+        description: "Secure API vault and proxy management system.",
+        stack: ["NEXT.JS", "TYPESCRIPT", "PRISMA", "ZOD"],
+        details: "Centralized credential management platform. Allows creating granular proxy APIs to share access without exposing master keys. Built with robust type-safety and encrypted storage.",
+        github: "https://github.com/rx6ru/wombat",
     },
     {
         id: "03",
-        name: "ECHO_PROTOCOL",
-        description: "Decentralized identity verification layer.",
-        stack: ["SOLIDITY", "ETHEREUM", "ZK-SNARKS"],
-        details: "Zero-knowledge proof implementation for verifiable credentials. Allows users to prove ownership of assets without revealing wallet addresses.",
-        live: "https://example.com",
+        name: "EDVO",
+        description: "Local-first credential & data vault for Android.",
+        stack: ["KOTLIN", "COMPOSE_UI", "SQLDELIGHT"],
+        details: "Security-focused mobile application built with Kotlin Multiplatform. Ensures zero-knowledge privacy by performing all encryption and data storage locally on the device.",
+        github: "https://github.com/rx6ru/EDVO",
+    },
+    {
+        id: "04",
+        name: "W2CHAT",
+        description: "Real-time full-stack messaging application.",
+        stack: ["MERN", "SOCKET.IO", "JWT"],
+        details: "Instant bidirectional communication platform. Features secure JWT authentication, persistent message history, and a responsive React interface with real-time socket events.",
+        github: "https://github.com/rx6ru/W2Chat",
     },
 ];
 
 import ActiveGridBackground from "@/components/ActiveGridBackground";
+import SectionDecorator from "@/components/SectionDecorator";
 
 export default function ProjectTerminal() {
 
@@ -64,7 +72,7 @@ export default function ProjectTerminal() {
                     </h2>
                 </div>
 
-                <div className="border-t border-grid-dim">
+                <SectionDecorator label="ACTIVE_DEPLOYMENTS" className="border-t border-grid-dim">
                     {/* Header Row (Desktop) */}
                     <div className="hidden md:grid grid-cols-12 py-4 px-4 md:px-6 text-xs font-mono text-gray-500 border-b border-grid-dim/50">
                         <div className="col-span-1">ID</div>
@@ -82,7 +90,7 @@ export default function ProjectTerminal() {
                             onToggle={() => toggleExpand(project.id)}
                         />
                     ))}
-                </div>
+                </SectionDecorator>
             </div>
         </section>
     );

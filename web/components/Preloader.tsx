@@ -8,6 +8,18 @@ export default function Preloader() {
     const [isLoading, setIsLoading] = useState(true);
     const [counter, setCounter] = useState(0);
 
+    const [coords, setCoords] = useState({ lat: 40.7128, lng: -74.006 });
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCoords({
+                lat: 40 + Math.random() * 2,
+                lng: -74 + Math.random() * 2
+            });
+        }, 120); // Rapid updates for "searching" effect
+        return () => clearInterval(interval);
+    }, []);
+
     useEffect(() => {
         // Eased counter animation - smoother increments
         let current = 0;
@@ -47,9 +59,9 @@ export default function Preloader() {
                         </div>
 
                         {/* Top Right */}
-                        <div className="hidden md:flex flex-col gap-1 text-right">
-                            <span>N 40° 42' 46"</span>
-                            <span>W 74° 00' 21"</span>
+                        <div className="hidden md:flex flex-col gap-1 text-right tabular-nums">
+                            <span>N {coords.lat.toFixed(4)}°</span>
+                            <span>W {coords.lng.toFixed(4)}°</span>
                         </div>
                     </div>
 
