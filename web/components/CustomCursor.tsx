@@ -23,7 +23,7 @@ const CURSOR_CONFIG = {
 
     // Spring physics
     spring: {
-        stiffness: 150,
+        stiffness: 250,
         damping: 15,
         mass: 0.1
     }

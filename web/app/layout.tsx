@@ -1,6 +1,7 @@
 import { Inter, JetBrains_Mono, Space_Mono } from "next/font/google";
 import "./globals.css";
 import { NoiseOverlay } from "@/components/NoiseOverlay";
+import { generateStructuredData } from "@/lib/structured-data";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
 import Preloader from "@/components/Preloader";
@@ -42,6 +43,12 @@ export default function RootLayout({
             <body
                 className={`${spaceMono.variable} antialiased bg-black text-white selection:bg-neon/30 selection:text-neon`}
             >
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify(generateStructuredData()),
+                    }}
+                />
                 <Preloader />
                 <TechnicalOverlay />
                 <CustomCursor />

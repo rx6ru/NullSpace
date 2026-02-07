@@ -1,112 +1,249 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
 import { motion } from "motion/react";
 import ActiveGridBackground from "@/components/ActiveGridBackground";
-import SectionDecorator from "@/components/SectionDecorator";
-import { Code2, Terminal, Cpu } from "lucide-react";
+import { Terminal } from "lucide-react";
 
+// --- Data ---
 const STATS = {
-    totalTime: "519 hrs 43 mins",
-    dailyAverage: "1 hr 20 mins",
+    totalTime: "519h 43m",
+    dailyAverage: "1h 20m",
+    uptime: "99.9%",
     languages: [
-        { name: "TypeScript", percent: 39.33, color: "#3178c6" },
-        { name: "Kotlin", percent: 23.32, color: "#7f52ff" },
-        { name: "Git Config", percent: 21.99, color: "#f14e32" },
-        { name: "Markdown", percent: 12.81, color: "#ffffff" },
-        { name: "JSON", percent: 2.21, color: "#f1e05a" },
+        { name: "TypeScript", percent: 39 },
+        { name: "Kotlin", percent: 23 },
+        { name: "Git Config", percent: 22 },
+        { name: "Markdown", percent: 13 },
+        { name: "JSON", percent: 3 },
     ],
     editors: [
-        { name: "Zed", percent: 89.88 },
-        { name: "Android Studio", percent: 10.12 },
+        { name: "Zed", percent: 90 },
+        { name: "Android Studio", percent: 10 },
     ],
-    os: "Linux (100%)",
+    os: "Arch Linux (Kernel 6.8.9)",
 };
 
-export default function CodingActivity() {
+// --- Components ---
+
+/**
+ * Renders an ASCII progress bar.
+ * Example: [///////////////////.......] 65%
+ */
+function AsciiBar({ percent, length = 40, color, delay = 0, visible = false }: { percent: number; length?: number; color?: string; delay?: number; visible?: boolean }) {
+    const filledCount = Math.round((percent / 100) * length);
+    const [currentFilled, setCurrentFilled] = useState(0);
+
+    useEffect(() => {
+        if (!visible) return;
+
+        const startTimeout = setTimeout(() => {
+            const interval = setInterval(() => {
+                setCurrentFilled(prev => {
+                    if (prev < filledCount) return prev + 1;
+                    clearInterval(interval);
+                    return prev;
+                });
+            }, 15); // Fast typing effect
+            return () => clearInterval(interval);
+        }, delay);
+
+        return () => clearTimeout(startTimeout);
+    }, [visible, filledCount, delay]);
+
+    const bar = "█".repeat(currentFilled) + "░".repeat(length - currentFilled);
+
     return (
-        <section className="bg-black py-24 px-4 md:px-12 relative z-20 border-t border-grid-dim overflow-hidden">
+        <span className="font-mono text-xs md:text-sm whitespace-pre">
+            [<span style={{ color: color || "inherit" }}>{bar}</span>] {percent.toString().padStart(3)}%
+        </span>
+    );
+}
+
+export default function CodingActivity() {
+    // Animation Stages
+    // 0: Initial
+    // 1: Command Typed
+    // 2: System Init
+    // 3: Connection
+    // 4: Modules & Uptime
+    // 5: Grid Header (Languages)
+    // 6: Languages Reveal
+    // 7: Grid Header (Env)
+    // 8: Env Reveal
+    // 9: Footer
+    const [step, setStep] = useState(0);
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting && step === 0) {
+                    runBootSequence();
+                }
+            },
+            { threshold: 0.1 }
+        );
+
+        if (containerRef.current) {
+            observer.observe(containerRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, [step]);
+
+    const runBootSequence = () => {
+        const timings = [
+            500,  // 1: Command
+            800,  // 2: Init
+            1200, // 3: Connect
+            1600, // 4: Kernel
+            2000, // 5: Lang Header
+            2200, // 6: Lang Bars
+            2800, // 7: Env Header
+            3000, // 8: Env Bars
+            3500  // 9: Footer
+        ];
+
+        timings.forEach((time, index) => {
+            setTimeout(() => setStep(index + 1), time);
+        });
+    };
+
+    return (
+        <section ref={containerRef} className="bg-black py-0 h-auto relative z-20 border-t border-grid-dim overflow-hidden font-mono flex flex-col">
             <ActiveGridBackground />
 
-            <div className="max-w-7xl mx-auto relative z-10 flex flex-col gap-16">
-                {/* Header */}
-                <div className="flex items-center gap-4 text-neon">
-                    <Cpu className="w-6 h-6" />
-                    <h2 className="text-monolith font-bold text-xl tracking-tighter">
-                         // SYSTEM_METRICS
-                    </h2>
-                </div>
+            <div className="w-full flex flex-col relative z-10">
+                {/* Terminal Window Container */}
+                <div className="border-x border-b border-grid-dim bg-neutral-950/90 backdrop-blur-md flex flex-col shadow-2xl mx-4 md:mx-6 mb-12 mt-0 rounded-b-lg">
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                    {/* Left: Language Distribution */}
-                    <SectionDecorator className="flex flex-col gap-8 h-full">
-                        <div className="flex items-center justify-between text-xs font-mono text-gray-500 tracking-widest uppercase mb-4">
-                            <span>Language Distribution</span>
-                            <span>Total: {STATS.totalTime}</span>
+                    {/* Terminal Header */}
+                    <div className="flex items-center justify-between px-6 py-3 border-b border-grid-dim bg-white/5 sticky top-0 z-20">
+                        <div className="flex items-center gap-3 text-xs md:text-sm text-gray-500">
+                            <Terminal size={16} />
+                            <span>root@rxbru:~/system_metrics</span>
+                        </div>
+                        <div className="flex gap-2">
+                            <div className="w-3 h-3 rounded-full bg-grid-dim/50" />
+                            <div className="w-3 h-3 rounded-full bg-grid-dim/50" />
+                            <div className="w-3 h-3 rounded-full bg-grid-dim/50" />
+                        </div>
+                    </div>
+
+                    {/* Terminal Content */}
+                    <div className="p-6 md:p-12 text-sm md:text-base text-gray-300 space-y-6 font-mono leading-relaxed overflow-y-auto">
+
+                        {/* Command Line */}
+                        {step >= 1 && (
+                            <div className="flex gap-2 text-neon">
+                                <span>$</span>
+                                <motion.span
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    className="typing-effect"
+                                >
+                                    ./fetch_metrics.sh --verbose --full-width
+                                </motion.span>
+                            </div>
+                        )}
+
+                        {/* System Status Output */}
+                        <div className="space-y-1 text-xs md:text-sm text-gray-400">
+                            {step >= 2 && <p>&gt; INITIALIZING SYSTEM_MONITOR_V2...</p>}
+                            {step >= 3 && <p>&gt; CONNECTING TO WAKATIME_API... <span className="text-neon">OK (24ms)</span></p>}
+                            {step >= 4 && (
+                                <>
+                                    <p>&gt; LOADING KERNEL MODULES... <span className="text-neon">DONE</span></p>
+                                    <p>&gt; UPTIME: <span className="text-white">{STATS.uptime}</span> | OS: <span className="text-white">{STATS.os}</span></p>
+                                    <div className="h-px w-full bg-grid-dim/30 my-6" />
+                                </>
+                            )}
                         </div>
 
-                        <div className="flex flex-col gap-6">
-                            {STATS.languages.map((lang, index) => (
-                                <div key={lang.name} className="flex flex-col gap-2">
-                                    <div className="flex justify-between text-sm font-space-mono text-gray-400">
-                                        <span>{lang.name}</span>
-                                        <span>{lang.percent}%</span>
+                        {/* Metrics Grid */}
+                        <div className="grid grid-cols-1 xl:grid-cols-2 gap-16 md:gap-24">
+
+                            {/* Left Col: Languages */}
+                            {step >= 5 && (
+                                <div className="space-y-6">
+                                    <div className="text-neon uppercase tracking-widest text-xs mb-4 border-b border-grid-dim/30 pb-2 w-fit">
+                                        // LANGUAGE_DISTRIBUTION
                                     </div>
-                                    <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden">
-                                        <motion.div
-                                            initial={{ width: 0 }}
-                                            whileInView={{ width: `${lang.percent}%` }}
-                                            viewport={{ once: true }}
-                                            transition={{ duration: 1, ease: "easeOut", delay: index * 0.1 }}
-                                            className="h-full rounded-full"
-                                            style={{ backgroundColor: lang.color }}
-                                        />
+                                    <div className="flex flex-col gap-4">
+                                        {STATS.languages.map((lang, i) => (
+                                            <div key={lang.name} className="flex flex-col gap-1 w-full">
+                                                <div className="flex justify-between text-xs text-gray-500 w-full max-w-[600px]">
+                                                    <span>{lang.name}</span>
+                                                </div>
+                                                <AsciiBar
+                                                    percent={lang.percent}
+                                                    length={60}
+                                                    color={i === 0 ? "#3178c6" : i === 1 ? "#7f52ff" : undefined}
+                                                    visible={step >= 6}
+                                                    delay={i * 100}
+                                                />
+                                            </div>
+                                        ))}
                                     </div>
                                 </div>
-                            ))}
-                        </div>
-                    </SectionDecorator>
+                            )}
 
-                    {/* Right: Environment Stats */}
-                    <div className="flex flex-col gap-8">
-                        {/* Editors */}
-                        <SectionDecorator className="p-6 border border-white/5 bg-neutral-950/50">
-                            <div className="flex items-center gap-3 text-gray-500 font-mono text-sm tracking-widest uppercase mb-6">
-                                <Terminal size={16} />
-                                <span>Environment / Editors</span>
-                            </div>
-
-                            <div className="flex flex-col gap-4">
-                                {STATS.editors.map((editor) => (
-                                    <div key={editor.name} className="flex flex-col gap-2">
-                                        <div className="flex justify-between text-sm font-space-mono text-gray-400">
-                                            <span>{editor.name}</span>
-                                            <span>{editor.percent}%</span>
+                            {/* Right Col: Editors & Stats */}
+                            {step >= 7 && (
+                                <div className="space-y-10">
+                                    <div className="space-y-6">
+                                        <div className="text-neon uppercase tracking-widest text-xs mb-4 border-b border-grid-dim/30 pb-2 w-fit">
+                                            // ENV_CONFIG
                                         </div>
-                                        <div className="h-1 w-full bg-white/5">
-                                            <motion.div
-                                                initial={{ width: 0 }}
-                                                whileInView={{ width: `${editor.percent}%` }}
-                                                viewport={{ once: true }}
-                                                transition={{ duration: 1 }}
-                                                className="h-full bg-neon"
-                                            />
+                                        <div className="flex flex-col gap-4">
+                                            {STATS.editors.map((editor, i) => (
+                                                <div key={editor.name} className="flex flex-col gap-1">
+                                                    <span className="text-xs text-gray-500">{editor.name}</span>
+                                                    <AsciiBar
+                                                        percent={editor.percent}
+                                                        length={60}
+                                                        visible={step >= 8}
+                                                        delay={i * 100}
+                                                    />
+                                                </div>
+                                            ))}
                                         </div>
                                     </div>
-                                ))}
-                            </div>
-                        </SectionDecorator>
 
-                        {/* OS & Daily Average */}
-                        <div className="grid grid-cols-2 gap-4">
-                            <div className="p-6 border border-white/5 bg-neutral-950/50 flex flex-col gap-2 items-center justify-center text-center">
-                                <span className="text-gray-500 text-xs font-mono uppercase">Operating System</span>
-                                <span className="text-xl font-bold text-monolith text-white">{STATS.os}</span>
-                            </div>
-                            <div className="p-6 border border-white/5 bg-neutral-950/50 flex flex-col gap-2 items-center justify-center text-center">
-                                <span className="text-gray-500 text-xs font-mono uppercase">Daily Average</span>
-                                <span className="text-xl font-bold text-neon">{STATS.dailyAverage}</span>
-                            </div>
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ duration: 0.5 }}
+                                        className="p-6 border border-dashed border-grid-dim text-xs space-y-3 text-gray-400 max-w-md bg-white/5"
+                                    >
+                                        <div className="flex justify-between">
+                                            <span>TOTAL_TIME_CODED:</span>
+                                            <span className="text-white font-bold">{STATS.totalTime}</span>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <span>DAILY_AVERAGE:</span>
+                                            <span className="text-white font-bold">{STATS.dailyAverage}</span>
+                                        </div>
+                                    </motion.div>
+                                </div>
+                            )}
                         </div>
+
+                        {/* Footer Prompt */}
+                        {step >= 9 && (
+                            <div className="mt-4 pt-4 border-t border-grid-dim/30 text-gray-500 text-xs">
+                                <span>root@rxbru:~/system_metrics$ </span>
+                                <motion.span
+                                    animate={{ opacity: [1, 0, 1] }}
+                                    transition={{ repeat: Infinity, duration: 0.8 }}
+                                    className="text-neon"
+                                >
+                                    _
+                                </motion.span>
+                            </div>
+                        )}
+
                     </div>
                 </div>
             </div>
