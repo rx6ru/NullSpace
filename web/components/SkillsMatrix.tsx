@@ -2,12 +2,6 @@
 
 import { motion } from "motion/react";
 import {
-    Cpu,
-    Globe,
-    Server,
-    Database,
-    BrainCircuit,
-    LockKeyhole,
     Code2,
     ShieldCheck
 } from "lucide-react";
@@ -16,96 +10,15 @@ import {
     whiteRevealTransition
 } from "@/lib/effects";
 
-// --- Data Configuration ---
+import { LANGUAGES, DOMAINS } from "@/lib/data/skills";
 
-const LANGUAGES = [
-    { name: "TypeScript", level: "Expert" },
-    { name: "Python", level: "Expert" },
-    { name: "Go", level: "Advanced" },
-    { name: "Rust", level: "Intermediate" },
-    { name: "Solidity", level: "Intermediate" },
-    { name: "SQL", level: "Advanced" },
-    { name: "HTML/CSS", level: "Expert" },
-];
+import dynamic from "next/dynamic";
 
-const DOMAINS = [
-    {
-        id: "backend",
-        title: "Backend & API Design",
-        icon: Server,
-        skills: [
-            "Node.js", "Express.js", "FastAPI",
-            "Socket.io", "RabbitMQ", "Kafka",
-            "REST APIs", "GraphQL", "gRPC",
-            "JWT", "OAuth", "Session Tokens"
-        ],
-        description: "High-performance server architecture and scalable APIs."
-    },
-    {
-        id: "ai",
-        title: "AI & Intelligent Systems",
-        icon: BrainCircuit,
-        skills: [
-            "OpenAI/Anthropic API", "RAG Pipelines",
-            "AI Agents", "LangChain", "LangGraph",
-            "Vector Embeddings", "MCP"
-        ],
-        description: "Building autonomous agents and semantic search systems."
-    },
-    {
-        id: "data",
-        title: "Data Infrastructure",
-        icon: Database,
-        skills: [
-            "PostgreSQL", "MongoDB", "Redis",
-            "Supabase", "NeonDB", "Pinecone", "Qdrant",
-            "Prisma", "Drizzle"
-        ],
-        description: "Robust data modeling, ORMs, and vector storage."
-    },
-    {
-        id: "devops",
-        title: "Cloud & DevOps",
-        icon: Cpu,
-        skills: [
-            "AWS", "Docker", "CI/CD Pipelines",
-            "Nginx", "Linux", "Git", "GitHub Actions"
-        ],
-        description: "Production-grade deployment and infrastructure automation."
-    },
-    {
-        id: "web3",
-        title: "Web3 & Blockchain",
-        icon: Globe,
-        skills: [
-            "Solana", "Solidity", "Smart Contracts",
-            "Ethereum", "DeFi", "Web3.js"
-        ],
-        description: "Decentralized applications and on-chain development."
-    },
-    // {
-    //     id: "security",
-    //     title: "Security & Analysis",
-    //     icon: LockKeyhole,
-    //     skills: [
-    //         "Ghidra", "Reverse Engineering", "Malware Analysis",
-    //         "Penetration Testing", "Binary Exploitation"
-    //     ],
-    //     description: "Systems security, binary analysis, and vulnerability research."
-    // },
-    {
-        id: "frontend",
-        title: "Frontend Development",
-        icon: Cpu,
-        skills: [
-            "React.js", "Next.js", "Tailwind CSS",
-            "Framer Motion"
-        ],
-        description: "Modern, responsive interfaces with clean architecture."
-    }
-];
+const ActiveGridBackground = dynamic(() => import("@/components/ActiveGridBackground"), {
+    ssr: false,
+    loading: () => <div className="absolute inset-0 z-[-1]" />
+});
 
-import ActiveGridBackground from "@/components/ActiveGridBackground";
 import SectionDecorator from "@/components/SectionDecorator";
 
 // --- Components ---

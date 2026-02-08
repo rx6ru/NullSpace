@@ -9,6 +9,7 @@ import Preloader from "@/components/Preloader";
 import ScrollProgress from "@/components/ScrollProgress";
 import ScrollToTop from "@/components/ScrollToTop";
 import TechnicalOverlay from "@/components/TechnicalOverlay";
+import BackToTop from "@/components/BackToTop";
 
 const inter = Inter({
     subsets: ["latin"],
@@ -55,6 +56,7 @@ export default function RootLayout({
                     <TechnicalOverlay />
                     <CustomCursor />
                     <ScrollToTop />
+                    <BackToTop />
                     <ScrollProgress />
                     <SmoothScroll>
                         <NoiseOverlay />

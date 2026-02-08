@@ -16,91 +16,16 @@ import {
     ExternalLink
 } from "lucide-react";
 import { clsx } from "clsx";
-import ActiveGridBackground from "@/components/ActiveGridBackground";
+import dynamic from "next/dynamic";
 
-// --- Types ---
+const ActiveGridBackground = dynamic(() => import("@/components/ActiveGridBackground"), {
+    ssr: false,
+    loading: () => <div className="absolute inset-0 z-[-1]" />
+});
 
-interface Project {
-    id: string;
-    pid: string; // Process ID style (e.g., "PID_8823")
-    name: string;
-    description: string;
-    stack: string[];
-    details: string;
-    features: string[]; // Bullet points for the "Architecture" section
-    github?: string;
-    live?: string;
-    type: "EXTENSION" | "BACKEND" | "ANDROID" | "WEB_APP";
-}
+import { PROJECTS, type Project } from "@/lib/data/projects";
 
-// --- Data ---
-
-const PROJECTS: Project[] = [
-    {
-        id: "concize",
-        pid: "PID_2048",
-        name: "CONCIZE",
-        type: "EXTENSION",
-        description: "Chrome Extension meeting assistant pipeline.",
-        features: [
-            "Real-time audio capture",
-            "Async RabbitMQ processing pipeline",
-            "Groq-powered transcription",
-            "Vector-based semantic search (Qdrant)"
-        ],
-        stack: ["CHROME EXTENSION", "EXPRESS", "RABBITMQ", "GROQ SDK", "QDRANT"],
-        details: "Browser extension for capturing meeting audio. Uses an async microservices pipeline (RabbitMQ) to chunk audio, generating transcripts via Groq and semantic embeddings for Qdrant-powered chat and query.",
-        github: "https://github.com/rx6ru/Concize",
-    },
-    {
-        id: "wombat",
-        pid: "PID_8080",
-        name: "WOMBAT",
-        type: "BACKEND",
-        description: "Secure API vault and proxy management system.",
-        features: [
-            "Centralized credential vault",
-            "Granular proxy API generation",
-            "Rate-limiting via Upstash",
-            "Zero-exposure master key architecture"
-        ],
-        stack: ["NEXT.JS 16", "SUPABASE", "PRISMA", "EXPRESS", "UPSTASH"],
-        details: "A centralized credential management platform that allows creating granular proxy APIs to share access without exposing master keys. Backend powered by Express & Prisma with Upstash for high-performance rate limiting.",
-        github: "https://github.com/rx6ru/wombat",
-    },
-    {
-        id: "edvo",
-        pid: "PID_1934",
-        name: "EDVO",
-        type: "ANDROID",
-        description: "Local-first Android security application.",
-        features: [
-            "Zero-knowledge architecture",
-            "Local SQLDelight encryption",
-            "Kotlin Multiplatform core",
-            "Offline-first sync capability"
-        ],
-        stack: ["KOTLIN", "JETPACK COMPOSE", "SQLDELIGHT", "KTOR"],
-        details: "Security-focused Android application built with Kotlin. Ensures zero-knowledge privacy by performing all encryption and data storage locally using SQLDelight, syncing only encrypted blobs.",
-        github: "https://github.com/rx6ru/EDVO",
-    },
-    {
-        id: "w2chat",
-        pid: "PID_3000",
-        name: "W2CHAT",
-        type: "WEB_APP",
-        description: "Real-time MERN stack chat application.",
-        features: [
-            "Bidirectional Socket.IO events",
-            "JWT Authentication",
-            "Persistent MongoDB message history",
-            "Responsive React UI"
-        ],
-        stack: ["MERN STACK", "SOCKET.IO", "JWT", "REACT"],
-        details: "Instant bidirectional communication platform. Features secure JWT authentication, persistent message history, and a responsive React interface with real-time socket events.",
-        github: "https://github.com/rx6ru/W2Chat",
-    },
-];
+// --- Main Layout ---
 
 // --- Main Layout ---
 
@@ -138,10 +63,10 @@ export default function ProjectTerminal() {
                 </div>
 
                 {/* The Hypervisor Layout */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 border border-monolith/20 bg-void/50 backdrop-blur-sm shadow-2xl">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 border border-monolith/20 bg-void/50 backdrop-blur-sm shadow-2xl overflow-hidden rounded-lg">
 
                     {/* Left Panel: Process Queue (Sidebar) */}
-                    <div className="col-span-1 lg:col-span-4 border-b lg:border-b-0 lg:border-r border-monolith/20 flex flex-col h-[500px] lg:h-[700px]">
+                    <div className="col-span-1 lg:col-span-4 border-b lg:border-b-0 lg:border-r border-monolith/20 flex flex-col h-[300px] lg:h-[700px]">
                         <div className="p-4 border-b border-monolith/10 bg-monolith/5 text-xs font-mono text-monolith/50 flex justify-between items-center sticky top-0 z-10">
                             <span>&gt; SELECT_PROJECT</span>
                             <Activity size={14} className="text-neon" />
@@ -181,7 +106,7 @@ export default function ProjectTerminal() {
                                     </h3>
 
                                     <p className="text-xs text-monolith/50 line-clamp-1 font-mono">
-                                        // {project.type}
+                                    // {project.type}
                                     </p>
                                 </button>
                             ))}
@@ -189,7 +114,7 @@ export default function ProjectTerminal() {
                     </div>
 
                     {/* Right Panel: Diagnostics (Detail View) */}
-                    <div className="col-span-1 lg:col-span-8 flex flex-col h-full relative overflow-hidden bg-dots-pattern">
+                    <div className="col-span-1 lg:col-span-8 flex flex-col h-[600px] lg:h-full relative overflow-hidden bg-dots-pattern border-t lg:border-t-0 border-monolith/20">
                         {/* Scanline Effect Overlay */}
                         <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.05)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] z-[1] opacity-20 bg-[length:100%_2px,3px_100%]" />
 
@@ -203,15 +128,15 @@ export default function ProjectTerminal() {
                                 className="flex-1 flex flex-col h-full relative z-10"
                             >
                                 {/* Detail Header */}
-                                <div className="p-8 pb-4 border-b border-monolith/10 flex flex-col gap-4">
-                                    <div className="flex items-center gap-2 text-neon/70 font-mono text-xs">
+                                <div className="p-8 pb-4 border-b border-monolith/10 flex flex-col gap-4 relative overflow-hidden">
+                                    <div className="flex items-center gap-2 text-neon/70 font-mono text-xs relative z-10">
                                         <Cpu size={14} />
                                         <span>ACTIVE_PROJECT: {selectedProject.name.toUpperCase()}</span>
                                     </div>
                                     <h1 className="text-5xl md:text-7xl font-bold font-space-mono text-monolith opacity-10 leading-[0.8] tracking-tighter absolute right-6 top-6 select-none pointer-events-none">
                                         {selectedProject.pid.split("_")[1]}
                                     </h1>
-                                    <div className="text-lg md:text-2xl font-light text-monolith/90 max-w-2xl leading-relaxed">
+                                    <div className="text-lg md:text-2xl font-light text-monolith/90 max-w-2xl leading-relaxed relative z-10">
                                         {selectedProject.description}
                                     </div>
                                 </div>

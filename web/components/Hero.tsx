@@ -2,7 +2,7 @@
 
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ArrowDown } from "lucide-react";
 import NullStateShader from "@/components/NullStateShader";
 import { heroParallax } from "@/lib/effects";
 
@@ -91,6 +91,17 @@ export default function Hero() {
                             [LINKEDIN]
                             <ArrowUpRight className="w-6 h-6 md:w-8 md:h-8 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
                         </a>
+                    </div>
+                    {/* Scroll Indicator */}
+                    {/* Scroll Indicator - Centered on the top border */}
+                    {/* Scroll Indicator - Floating above the footer grid */}
+                    <div className="absolute -top-20 left-1/2 -translate-x-1/2 z-30 pointer-events-none opacity-20">
+                        <motion.div
+                            animate={{ y: [0, 8, 0] }}
+                            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+                        >
+                            <ArrowDown size={40} />
+                        </motion.div>
                     </div>
                 </div>
             </div>

@@ -65,8 +65,16 @@ export default function ActiveGridBackground() {
     // We use a CSS background pattern for the lines (performant)
     // And render actual divs only for active cells
 
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
     return (
-        <div className="absolute inset-0 z-[-1] pointer-events-none overflow-hidden">
+        <div
+            className={`absolute inset-0 z-[-1] pointer-events-none overflow-hidden transition-opacity duration-1000 ease-in-out ${mounted && dimensions.width > 0 ? "opacity-100" : "opacity-0"}`}
+        >
             {/* Base Grid Lines (CSS Pattern) */}
             <div
                 className="absolute inset-0 opacity-[0.2]"

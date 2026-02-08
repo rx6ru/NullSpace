@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
 import { useTheme } from "next-themes";
@@ -168,10 +168,16 @@ export default function NullStateShader() {
         };
     }, []);
 
+    const [loaded, setLoaded] = useState(false);
+
     // Keep theme ref updated
     useEffect(() => {
         themeRef.current = resolvedTheme;
     }, [resolvedTheme]);
 
-    return <div ref={containerRef} className="absolute inset-0 z-0 pointer-events-none transition-opacity duration-1000" />;
+    useEffect(() => {
+        setLoaded(true);
+    }, []);
+
+    return <div ref={containerRef} className={`absolute inset-0 z-0 pointer-events-none transition-opacity duration-1000 ${loaded ? "opacity-100" : "opacity-0"}`} />;
 }

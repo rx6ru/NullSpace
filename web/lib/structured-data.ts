@@ -4,7 +4,7 @@ export function generateStructuredData() {
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Rxbru",
-        "url": "https://rxbru.com", // Placeholder, updated based on deployment
+        "url": "https://rxbru.dev", // TODO: Update with actual domain after deployment
         "jobTitle": "Software Engineer",
         "knowsAbout": [
             "Software Architecture",
