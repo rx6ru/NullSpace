@@ -12,8 +12,8 @@ export default function Home() {
             <Hero />
             {/* <About /> */}
             <SkillsMatrix />
-            <CodingActivity />
             <ProjectTerminal />
+            <CodingActivity />
             {/* <Contact /> */}
             <Footer />
         </main>

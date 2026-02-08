@@ -111,7 +111,7 @@ export default function CodingActivity() {
     };
 
     return (
-        <section ref={containerRef} className="bg-void py-0 h-auto relative z-20 border-t border-grid-dim overflow-hidden font-mono flex flex-col transition-colors duration-300">
+        <section id="stats" ref={containerRef} className="bg-void py-0 h-auto relative z-20 border-t border-grid-dim overflow-hidden font-mono flex flex-col transition-colors duration-300">
             <ActiveGridBackground />
 
             <div className="w-full flex flex-col relative z-10">

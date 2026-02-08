@@ -43,6 +43,9 @@ export default function Footer() {
                         <a href="#projects" className="text-monolith/60 hover:text-neon transition-colors">
                             → Projects
                         </a>
+                        <a href="#stats" className="text-monolith/60 hover:text-neon transition-colors">
+                            → Stats
+                        </a>
                     </nav>
                 </div>
 
