@@ -118,16 +118,16 @@ export default function ProjectTerminal() {
                     <div className="flex flex-col gap-2">
                         <div className="flex items-center gap-3 text-neon mb-2">
                             <Terminal size={20} />
-                            <span className="font-mono text-xs tracking-widest uppercase">System_Monitor_v2.0</span>
+                            <span className="font-mono text-xs tracking-widest uppercase">PROJECT_INDEX_v2.0</span>
                         </div>
                         <h2 className="text-4xl md:text-5xl font-bold text-monolith tracking-tighter uppercase">
-                            Process_Manifest
+                            FEATURED_PROJECTS
                         </h2>
                     </div>
 
                     <div className="flex gap-8 text-xs font-mono text-monolith/60">
                         <div className="flex flex-col">
-                            <span className="text-monolith/40 mb-1">Total Processes</span>
+                            <span className="text-monolith/40 mb-1">Total Projects</span>
                             <span className="text-monolith font-bold text-lg">{PROJECTS.length}</span>
                         </div>
                         <div className="flex flex-col">
@@ -143,7 +143,7 @@ export default function ProjectTerminal() {
                     {/* Left Panel: Process Queue (Sidebar) */}
                     <div className="col-span-1 lg:col-span-4 border-b lg:border-b-0 lg:border-r border-monolith/20 flex flex-col h-[500px] lg:h-[700px]">
                         <div className="p-4 border-b border-monolith/10 bg-monolith/5 text-xs font-mono text-monolith/50 flex justify-between items-center sticky top-0 z-10">
-                            <span>&gt; PROCESS_QUEUE</span>
+                            <span>&gt; SELECT_PROJECT</span>
                             <Activity size={14} className="text-neon" />
                         </div>
 
@@ -206,7 +206,7 @@ export default function ProjectTerminal() {
                                 <div className="p-8 pb-4 border-b border-monolith/10 flex flex-col gap-4">
                                     <div className="flex items-center gap-2 text-neon/70 font-mono text-xs">
                                         <Cpu size={14} />
-                                        <span>EXECUTING_PROCESS: {selectedProject.name.toUpperCase()}</span>
+                                        <span>ACTIVE_PROJECT: {selectedProject.name.toUpperCase()}</span>
                                     </div>
                                     <h1 className="text-5xl md:text-7xl font-bold font-space-mono text-monolith opacity-10 leading-[0.8] tracking-tighter absolute right-6 top-6 select-none pointer-events-none">
                                         {selectedProject.pid.split("_")[1]}
@@ -277,22 +277,6 @@ export default function ProjectTerminal() {
                                                             <span className="font-mono text-xs font-bold">SOURCE</span>
                                                         </a>
                                                     )}
-                                                    {/* {selectedProject.live ? (
-                                                        <a
-                                                            href={selectedProject.live}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            className="flex items-center justify-center gap-2 p-4 border border-monolith/20 bg-monolith/5 hover:bg-monolith/10 hover:border-neon/50 text-monolith transition-all group"
-                                                        >
-                                                            <ExternalLink size={18} className="group-hover:text-neon transition-colors" />
-                                                            <span className="font-mono text-xs font-bold">DEPLOY</span>
-                                                        </a>
-                                                    ) : (
-                                                        <div className="flex items-center justify-center gap-2 p-4 border border-monolith/10 opacity-50 cursor-not-allowed bg-transparent text-monolith/40">
-                                                            <Shield size={18} />
-                                                            <span className="font-mono text-xs font-bold">RESTRICTED</span>
-                                                        </div>
-                                                    )} */}
                                                 </div>
                                             </div>
                                         </div>
@@ -304,5 +288,6 @@ export default function ProjectTerminal() {
                 </div>
             </div>
         </section>
+
     );
 }
