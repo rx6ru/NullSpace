@@ -17,8 +17,8 @@ export const DOMAINS = [
         icon: Server,
         skills: [
             "Node.js", "Express.js", "FastAPI",
-            "Socket.io", "RabbitMQ", "Kafka",
-            "REST APIs", "GraphQL", "gRPC",
+            "Socket.io", "RabbitMQ",
+            "REST APIs", "GraphQL",
             "JWT", "OAuth", "Session Tokens"
         ],
         description: "High-performance server architecture and scalable APIs."
@@ -28,7 +28,7 @@ export const DOMAINS = [
         title: "AI & Intelligent Systems",
         icon: BrainCircuit,
         skills: [
-            "OpenAI/Anthropic API", "RAG Pipelines",
+            "Gemini/Groq/Openrouter API", "RAG Pipelines",
             "AI Agents", "LangChain", "LangGraph",
             "Vector Embeddings", "MCP"
         ],
@@ -61,7 +61,7 @@ export const DOMAINS = [
         icon: Globe,
         skills: [
             "Solana", "Solidity", "Smart Contracts",
-            "Ethereum", "DeFi", "Web3.js"
+            "Ethereum", "Web3.js"
         ],
         description: "Decentralized applications and on-chain development."
     },

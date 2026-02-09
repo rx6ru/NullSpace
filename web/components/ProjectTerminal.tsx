@@ -164,7 +164,7 @@ export default function ProjectTerminal() {
                                             </ul>
 
                                             <div className="mt-8 p-4 bg-monolith/5 border border-monolith/10 text-xs font-mono text-monolith/60 leading-relaxed rounded-sm">
-                                                <span className="text-neon block mb-2">&gt; DIAGNOSTIC_LOG:</span>
+                                                <span className="text-neon block mb-2">&gt; OVERVIEW:</span>
                                                 {selectedProject.details}
                                             </div>
                                         </div>

@@ -37,7 +37,7 @@ export default function SkillsMatrix() {
                     className="flex flex-col gap-2"
                 >
                     <h2 className="text-4xl md:text-6xl font-bold text-monolith tracking-tighter uppercase">
-                        Technical Arsenal
+                        Technical Proficiency
                     </h2>
                     <div className="h-1 w-24 bg-neon mt-4" />
                 </motion.div>
@@ -62,7 +62,7 @@ export default function SkillsMatrix() {
                 <SectionDecorator label="DOMAIN_MODULES" className="flex flex-col gap-8">
                     <div className="flex items-center gap-4 text-monolith/50 font-mono text-sm tracking-widest uppercase">
                         <ShieldCheck size={16} />
-                        <span>Domain Expertise</span>
+                        <span>Domains</span>
                         <div className="h-px bg-white/10 flex-grow" />
                     </div>
 
