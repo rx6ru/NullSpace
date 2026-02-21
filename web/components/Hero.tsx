@@ -2,8 +2,9 @@
 
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
-import { ArrowUpRight, ArrowDown } from "lucide-react";
+import { ArrowUpRight, ArrowDown, FileText } from "lucide-react";
 import NullStateShader from "@/components/NullStateShader";
+import MagneticButton from "@/components/MagneticButton";
 import { heroParallax } from "@/lib/effects";
 
 export default function Hero() {
@@ -31,13 +32,28 @@ export default function Hero() {
                 </h1>
 
                 <div className="flex flex-col gap-1 mt-4 ml-1 md:ml-5">
-                    <span className="font-space-mono text-xl md:text-2xl tracking-[0.15em] text-monolith uppercase font-bold">
+                    <span className="font-space-mono text-2xl md:text-3xl lg:text-4xl tracking-[0.15em] text-monolith uppercase font-bold">
                         Amar Mahato
                     </span>
                     {/* Fixed mobile responsiveness */}
-                    <span className="font-space-mono text-sm md:text-base lg:text-[2vw] tracking-[0.25em] text-monolith/60 uppercase">
+                    <span className="font-space-mono text-lg md:text-xl lg:text-[2vw] tracking-[0.25em] text-monolith/60 uppercase mt-2">
                         Backend_Engineer
                     </span>
+
+                    {/* Resume Button */}
+                    <div className="mt-8 md:mt-10 z-40 relative w-fit">
+                        <MagneticButton strength={0.2} href="https://raw.githubusercontent.com/rx6ru/rx6ru/main/.docs/Amar_Mahato_SD.pdf" target="_blank" rel="noopener noreferrer">
+                            <div className="flex items-center gap-3 px-6 py-3 md:px-8 md:py-4 bg-void border border-monolith/20 hover:border-neon/50 text-monolith/80 hover:text-white transition-colors group relative overflow-hidden backdrop-blur-md">
+                                {/* Subtle glow behind the button */}
+                                <div className="absolute inset-0 bg-neon/0 group-hover:bg-neon/10 transition-colors duration-500" />
+
+                                <FileText className="w-5 h-5 md:w-6 md:h-6 group-hover:scale-110 transition-transform duration-300 relative z-10" />
+                                <span className="font-space-mono text-sm md:text-lg tracking-[0.15em] font-bold relative z-10">
+                                    VIEW RESUME
+                                </span>
+                            </div>
+                        </MagneticButton>
+                    </div>
                 </div>
             </div>
 
@@ -92,6 +108,7 @@ export default function Hero() {
                             <ArrowUpRight className="w-6 h-6 md:w-8 md:h-8 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
                         </a>
                     </div>
+
                     {/* Scroll Indicator */}
                     {/* Scroll Indicator - Centered on the top border */}
                     {/* Scroll Indicator - Floating above the footer grid */}

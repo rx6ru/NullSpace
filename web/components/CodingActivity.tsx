@@ -51,7 +51,9 @@ function AsciiBar({ percent, length = 40, color, delay = 0, visible = false }: {
         return () => clearTimeout(startTimeout);
     }, [visible, filledCount, delay]);
 
-    const bar = "█".repeat(currentFilled) + "░".repeat(length - currentFilled);
+    // Ensure we don't pass a negative number to .repeat() if recalculation causes length to shrink below currentFilled
+    const emptyCount = Math.max(0, length - currentFilled);
+    const bar = "█".repeat(currentFilled) + "░".repeat(emptyCount);
 
     return (
         <span className="font-mono text-xs md:text-sm whitespace-pre">
