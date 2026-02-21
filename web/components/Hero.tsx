@@ -27,7 +27,7 @@ export default function Hero() {
         >
             {/* The Monolith Name Configuration */}
             <div className="flex flex-col z-10 mt-12 md:mt-0">
-                <h1 className="text-[15vw] leading-[0.8] font-bold tracking-tighter uppercase select-none mix-blend-difference text-monolith">
+                <h1 className="text-[clamp(4rem,15vw,15rem)] leading-[0.8] font-bold tracking-tighter uppercase select-none mix-blend-difference text-monolith">
                     RXBRU
                 </h1>
 
@@ -58,7 +58,7 @@ export default function Hero() {
             </div>
 
             {/* Bottom Grid */}
-            <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-end w-full max-w-7xl mx-auto border-t border-monolith/20 pt-8">
+            <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-end w-full max-w-7xl mx-auto border-t border-monolith/20 pt-8 mt-12 md:mt-0">
                 {/* Bio */}
                 <div className="max-w-md">
                     <p className="text-sm md:text-base font-space-mono text-monolith/60 leading-relaxed uppercase tracking-wide">
@@ -79,40 +79,39 @@ export default function Hero() {
                     </div>
 
                     {/* Social links - bracket text only, bigger */}
-                    <div className="flex gap-6 md:gap-8 text-monolith/60 mt-2">
+                    <div className="flex flex-wrap gap-4 sm:gap-6 md:gap-8 text-monolith/60 mt-2">
                         <a
                             href="https://github.com/rx6ru"
-                            className="hover:text-neon transition-colors flex items-center gap-1 group text-xl md:text-3xl lg:text-4xl font-bold tracking-tight"
+                            className="hover:text-neon transition-colors flex items-center gap-1 group text-lg sm:text-xl md:text-3xl lg:text-4xl font-bold tracking-tight py-2"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
                             [GITHUB]
-                            <ArrowUpRight className="w-6 h-6 md:w-8 md:h-8 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+                            <ArrowUpRight className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
                         </a>
                         <a
                             href="https://x.com/RxBRU_"
-                            className="hover:text-neon transition-colors flex items-center gap-1 group text-xl md:text-3xl lg:text-4xl font-bold tracking-tight"
+                            className="hover:text-neon transition-colors flex items-center gap-1 group text-lg sm:text-xl md:text-3xl lg:text-4xl font-bold tracking-tight py-2"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
                             [X.COM]
-                            <ArrowUpRight className="w-6 h-6 md:w-8 md:h-8 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+                            <ArrowUpRight className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
                         </a>
                         <a
                             href="https://www.linkedin.com/in/rxbru/"
-                            className="hover:text-neon transition-colors flex items-center gap-1 group text-xl md:text-3xl lg:text-4xl font-bold tracking-tight"
+                            className="hover:text-neon transition-colors flex items-center gap-1 group text-lg sm:text-xl md:text-3xl lg:text-4xl font-bold tracking-tight py-2"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
                             [LINKEDIN]
-                            <ArrowUpRight className="w-6 h-6 md:w-8 md:h-8 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+                            <ArrowUpRight className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
                         </a>
                     </div>
 
                     {/* Scroll Indicator */}
-                    {/* Scroll Indicator - Centered on the top border */}
                     {/* Scroll Indicator - Floating above the footer grid */}
-                    <div className="absolute -top-20 left-1/2 -translate-x-1/2 z-30 pointer-events-none opacity-20">
+                    <div className="absolute bottom-12 md:bottom-[-5rem] left-1/2 -translate-x-1/2 z-30 pointer-events-none opacity-20">
                         <motion.div
                             animate={{ y: [0, 8, 0] }}
                             transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}

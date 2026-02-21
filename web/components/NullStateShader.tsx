@@ -20,7 +20,15 @@ export default function NullStateShader() {
         // Scene setup
         const scene = new THREE.Scene();
         const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-        const renderer = new THREE.WebGLRenderer({ alpha: true });
+
+        let renderer: THREE.WebGLRenderer;
+        try {
+            renderer = new THREE.WebGLRenderer({ alpha: true });
+        } catch (error) {
+            console.warn("WebGL context creation failed, falling back to null state:", error);
+            return; // Early exit to prevent application crash
+        }
+
         renderer.setSize(width, height);
         container.appendChild(renderer.domElement);
 
@@ -86,7 +94,8 @@ export default function NullStateShader() {
                 }
 
                 void main() {
-                    vec2 st = gl_FragCoord.xy / u_resolution.xy;
+                    // Aspect ratio corrected coordinates
+                    vec2 st = gl_FragCoord.xy / min(u_resolution.x, u_resolution.y);
                     
                     // Slow moving noise
                     float t = u_time * 0.15;

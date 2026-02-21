@@ -85,7 +85,7 @@ function LanguageCard({ lang, index }: { lang: typeof LANGUAGES[0], index: numbe
             key={lang.name}
             initial={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="group relative !bg-void border border-monolith/20 p-4 flex flex-col items-center justify-center gap-2 hover:!bg-monolith/5 hover:border-neon/50 transition-all duration-300 overflow-hidden"
+            className="group relative !bg-void border border-monolith/20 p-3 sm:p-4 flex flex-col items-center justify-center gap-2 hover:!bg-monolith/5 hover:border-neon/50 transition-all duration-300 overflow-hidden"
         >
             {/* White overlay that fades out smoothly */}
             <motion.div
@@ -111,7 +111,7 @@ function DomainCard({ domain, index }: { domain: typeof DOMAINS[0], index: numbe
             key={domain.id} // Fix: use domain.id as key
             initial={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="group relative !bg-void border border-monolith/20 p-6 flex flex-col gap-4 hover:!bg-monolith/5 hover:border-neon/30 transition-colors duration-300 overflow-hidden"
+            className="group relative !bg-void border border-monolith/20 p-5 sm:p-6 flex flex-col gap-4 hover:!bg-monolith/5 hover:border-neon/30 transition-colors duration-300 overflow-hidden"
         >
             {/* White overlay that fades out smoothly */}
             <motion.div

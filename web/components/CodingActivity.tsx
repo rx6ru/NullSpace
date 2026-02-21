@@ -57,7 +57,11 @@ function AsciiBar({ percent, length = 40, color, delay = 0, visible = false }: {
 
     return (
         <span className="font-mono text-xs md:text-sm whitespace-pre">
-            [<span style={{ color: color || "inherit" }}>{bar}</span>] {percent.toString().padStart(3)}%
+            <span className="hidden sm:inline">[</span>
+            <span style={{ color: color || "inherit" }}>{bar}</span>
+            <span className="hidden sm:inline">] </span>
+            <span className="inline sm:hidden"> </span>
+            {percent.toString().padStart(3)}%
         </span>
     );
 }
@@ -87,9 +91,10 @@ export default function CodingActivity() {
             if (columnRef.current) {
                 const width = columnRef.current.offsetWidth;
                 // Estimate mono char width (approx 8px for text-sm)
-                // Divisor 6.5 -> 5.5 for even longer bars as requested
-                const calculated = Math.floor(width / 10) - 8;
-                setBarLength(Math.max(40, calculated));
+                // On mobile we need more aggressive scaling
+                const divisor = width < 400 ? 11 : 8.5;
+                const calculated = Math.floor(width / divisor) - (width < 400 ? 4 : 8);
+                setBarLength(Math.max(10, calculated)); // Allow much shorter bars on mobile
             }
         };
 
@@ -206,7 +211,7 @@ export default function CodingActivity() {
                     </div>
 
                     {/* Terminal Content */}
-                    <div className="p-6 md:p-12 text-sm md:text-base text-monolith/80 space-y-6 font-mono leading-relaxed overflow-y-auto">
+                    <div className="p-4 sm:p-6 md:p-12 text-sm md:text-base text-monolith/80 space-y-6 font-mono leading-relaxed overflow-x-auto whitespace-nowrap scrollbar-thin scrollbar-track-transparent scrollbar-thumb-monolith/10">
 
                         {/* Command Line */}
                         {step >= 1 && (
@@ -237,11 +242,11 @@ export default function CodingActivity() {
                         </div>
 
                         {/* Metrics Grid */}
-                        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 md:gap-16">
+                        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 md:gap-16 w-full max-w-full">
 
                             {/* Left Col: Languages */}
                             {step >= 5 && (
-                                <div ref={columnRef} className="space-y-6 w-full">
+                                <div ref={columnRef} className="space-y-6 w-full overflow-hidden">
                                     <div className="text-neon uppercase tracking-widest text-xs md:text-sm mb-4 border-b border-grid-dim/30 pb-2 w-fit">
                                         // LANGUAGE_DISTRIBUTION
                                     </div>
@@ -266,7 +271,7 @@ export default function CodingActivity() {
 
                             {/* Right Col: Editors & Stats */}
                             {step >= 7 && (
-                                <div className="space-y-10 w-full">
+                                <div className="space-y-10 w-full overflow-hidden">
                                     <div className="space-y-6 w-full">
                                         <div className="text-neon uppercase tracking-widest text-xs md:text-sm mb-4 border-b border-grid-dim/30 pb-2 w-fit">
                                             // ENV_CONFIG
