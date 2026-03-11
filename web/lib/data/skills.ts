@@ -70,8 +70,7 @@ export const DOMAINS = [
         title: "Frontend Development",
         icon: Cpu,
         skills: [
-            "React.js", "Next.js", "Tailwind CSS",
-            "Framer Motion"
+            "React.js", "Next.js", "Tailwind CSS"
         ],
         description: "Modern, responsive interfaces with clean architecture."
     }

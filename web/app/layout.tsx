@@ -31,7 +31,7 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata = {
-    title: "Rxbru | Portfolio",
+    title: "Amar Mahato | Software, Backend & Applied AI Engineer",
     description: "Code as Architecture.",
 };
 
