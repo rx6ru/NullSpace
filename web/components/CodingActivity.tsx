@@ -7,19 +7,19 @@ import { Terminal } from "lucide-react";
 
 // --- Data ---
 const STATS = {
-    totalTime: "519h 43m",
-    dailyAverage: "1h 20m",
+    totalTime: "21 hrs 21 mins",
+    dailyAverage: "3 hrs 3 mins",
     uptime: "99.9%",
     languages: [
-        { name: "TypeScript", percent: 39 },
-        { name: "Kotlin", percent: 23 },
-        { name: "Git Config", percent: 22 },
-        { name: "Markdown", percent: 13 },
-        { name: "JSON", percent: 3 },
+        { name: "Python", percent: 58 },
+        { name: "Markdown", percent: 24 },
+        { name: "Bash", percent: 6 },
+        { name: "TypeScript", percent: 6 },
+        { name: "Git Config", percent: 4 },
     ],
     editors: [
-        { name: "Zed", percent: 90 },
-        { name: "Android Studio", percent: 10 },
+        { name: "Antigravity", percent: 66 },
+        { name: "Zed", percent: 34 },
     ],
     os: "Arch Linux (Kernel 6.8.9)",
 };

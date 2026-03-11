@@ -20,7 +20,7 @@ export async function GET() {
 
         const response = await fetch(url, {
             headers: {
-                'Authorization': `Bearer ${API_KEY}`,
+                'Authorization': `Basic ${Buffer.from(API_KEY).toString('base64')}`,
                 'Content-Type': 'application/json',
                 'User-Agent': 'Portfolio-Stats-Fetcher/1.0 (rxbru)',
             },
