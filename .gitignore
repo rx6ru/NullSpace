@@ -13,6 +13,8 @@ web/.next/
 web/out/
 web/build/
 web/dist/
+web/.vercel/
+.vercel/
 
 # Env Files
 .env
